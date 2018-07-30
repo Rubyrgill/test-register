@@ -48,7 +48,7 @@ $("#submit-register").on("click", function (event) {
             console.log(error.message);
         })
         .then(function () {
-            window.location.href = "Homepage.html";
+            window.location.href = "index.html";
             $("#intro").append("WELCOME: " + user.email)
         });
 

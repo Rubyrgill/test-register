@@ -57,6 +57,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         event.preventDefault();
         $("#sign-out").removeClass("hide");
         $("#intro").append("WELCOME: " + user.email)
+
     }
 
     else {
