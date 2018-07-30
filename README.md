@@ -1,2 +1,1 @@
-# test-register
-testing register firebase
+# EatSmart
