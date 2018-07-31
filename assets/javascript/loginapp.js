@@ -2,9 +2,10 @@ var database = firebase.database();
 
 //LOGGING IN
 //---------------------------------------
-$("#log-in").on("click", e => {
+$("#log-in").on("click", function () {
 
     event.preventDefault();
+
     var userEmail = $("#user-email").val().trim();
     var userPass = $("#user-password").val().trim();
     var auth = firebase.auth();
@@ -19,20 +20,18 @@ $("#log-in").on("click", e => {
     if (userPass == "") {
         alert("missing Pass")
     } else {
-        alert("Welcome : " + userEmail)
-
+        alert("Welcome : " + userEmail);
     }
-    window.location.href = "Homepage.html";
 
     auth.signInWithEmailAndPassword(userEmail, userPass)
         .then(function (user) {
-            console.log(database.ref('/users/' + user.uid));
+            alert("YOUR ARE LOGGED IN " + user.email)
+            window.location.href = "index.html";
         }).catch(function (error) {
             console.log(error.code);
+            alert("Error: " + error.code)
             console.log(error.message)
         });
-    alert("YOUR ARE LOGGED IN")
-
 });
 
 
@@ -48,21 +47,22 @@ function isUserSignedIn() {
 //---------------------------------------
 firebase.auth().onAuthStateChanged(function (user) {
 
-
     console.log("user:", user);
 
 
     if (user != null) {
+
         event.preventDefault();
-        $("#sign-out").removeClass("hide");
-        $("#intro").append("WELCOME: " + user.email)
+
+        $("#intro").append("WELCOME: " + user.email);
+        $(".onlogin").addClass("hide");
+        $("#user-profile").removeClass("hide");
+
     }
 
     else {
-
         console.log("not logged in");
-        $("#sign-out").addClass("hide");
-        $("#profile").addClass("hide");
+        $("#log-out").addClass("hide");
     }
 });
 
